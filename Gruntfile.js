@@ -15,17 +15,18 @@ module.exports = function(grunt){
 
     jshint: {
       options: {
-        predef: ['document', 'console'],
+        predef: ['document', 'console', '$'],
         esnext: true,
         globalstrict: true,
-        browserify: true
+        browserify: true,
+        debug: true
       },
       files: ['./dev/js/**/*.js']
     },
 
     sass: {
       dist: {
-        files: './css/main.css' : './sass/main.scss'
+        files: {'./dist/css/main.css' : './dev/sass/main.scss'}
       }
     },
 
