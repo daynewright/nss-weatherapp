@@ -6,7 +6,7 @@ let url = 'http://api.openweathermap.org/data/2.5/';
 function today(coords){
     return new Promise(function(resolve, reject){
       $.ajax({
-        url: `${url}weather?lat=${lat}&lon=${lon}&APPID=${apiKey}`,
+        url: `${url}weather?lat=${coords.lat}&lon=${coords.lon}&APPID=${apiKey}`,
         type: 'GET'
       }).done(function(weatherData){
         resolve(weatherData);
@@ -17,7 +17,7 @@ function today(coords){
 function threeDay(coords){
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}forcast/daily?lat=${lat}&lon=${lon}&APPID=${apiKey}&cnt=3`,
+      url: `${url}forcast/daily?lat=${coords.lat}&lon=${coords.lon}&APPID=${apiKey}&cnt=3`,
       type: 'GET'
     }).done(function(weatherData){
       resolve(weatherData);
@@ -28,7 +28,7 @@ function threeDay(coords){
 function sevenDay(coords){
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}forcast/daily?lat=${lat}&lon=${lon}&APPID=${apiKey}&cnt=7`,
+      url: `${url}forcast/daily?lat=${coords.lat}&lon=${coords.lon}&APPID=${apiKey}&cnt=7`,
       type: 'GET'
     }).done(function(weatherData){
       resolve(weatherData);
