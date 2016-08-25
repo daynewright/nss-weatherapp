@@ -1,2 +1,4 @@
-/node-modules
+node_modules
+dev/bower_components
 *.txt
+.sass-cache
