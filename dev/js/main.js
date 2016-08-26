@@ -1,8 +1,13 @@
 'use strict';
 
+//runs the process
+require('./clicks');
+
+
+
 let getWeather = require('./api/weatherapi'),
     getLatLon = require('./api/mapsapi'),
-    coords = {}, weather = {};
+    coords = {}, weather = {}, userId;
 
 
 function testWeather(){
@@ -10,10 +15,9 @@ function testWeather(){
     .then(function(jsonData){
       coords.lat = jsonData.results[0].geometry.location.lat;
       coords.lon = jsonData.results[0].geometry.location.lng;
-
-      weather = getWeather(coords);
+      weather = getWeather.today(coords);
+      console.log(weather);
     });
-    console.log(weather);
 }
 
 testWeather();
