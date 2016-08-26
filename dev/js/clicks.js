@@ -1,24 +1,27 @@
 'use strict';
 
-let loginUser = require('./firebase/fb-auth');
+let fb = require('./firebase/fb-auth');
 let dom = require('./dom');
 let user;
 
 // contains all functions for clicks
 
 //signing in
-$('#signin').click(function(){
-  loginUser()
+$('#signin').click(signButton);
+
+
+function signButton(){
+  fb.logInGoogle()
    .then(function(results){
      user = results.user;
-     
+
      dom.addUserProfile(user);
      dom.addZipcodeSelect();
    }).then(function(){
      $('li').click(clickForecast);
+     $('#logout').click(logoutUser);
    });
- });
-
+}
 
 function clickForecast(evt){
   let input = $('input').val();
@@ -30,4 +33,15 @@ function clickForecast(evt){
     evt.preventDefault();
     window.alert ('Input must be a zipcode');
   }
+}
+
+function logoutUser(){
+  fb.logOut()
+    .then(function() {
+      console.log('signed out');
+      dom.loginPage();
+      $('#signin').click(signButton);
+    }, function(error) {
+      console.log('Oops..unable to sign out: ', error);
+    });
 }
