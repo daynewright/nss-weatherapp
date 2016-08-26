@@ -3,4 +3,4 @@ dev/bower_components
 *.txt
 .sass-cache
 dev/js/firebase/fb-key.js
-dist/
+dist/**/*

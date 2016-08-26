@@ -4,12 +4,22 @@ let zipcodeTemplate = require('../templates/zipcodeselect.hbs'),
     profileTemplate = require('../templates/profilenav.hbs');
 
 function addZipcodeSelect(){
-    $('#search').html(zipcodeTemplate());
-    $('#signin').remove();
+  return new Promise(function(resolve, reject){
+      zipCodeSelectFunction();
+      resolve();
+  });
+}
+
+function zipCodeSelectFunction(){
+  $('#search').html(zipcodeTemplate());
+  $('#signin').remove();
 }
 
 function addUserProfile(user){
-    $('').append();
+  return new Promise(function(resolve, reject){
+    $('.navbar-header').append(profileTemplate(user));
+    resolve();
+  });
 }
 
 
