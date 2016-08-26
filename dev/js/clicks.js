@@ -2,7 +2,10 @@
 
 let fb = require('./firebase/fb-auth');
 let dom = require('./dom');
-let user;
+//apis
+let getWeather = require('./api/weatherapi');
+let getLatLon = require('./api/mapsapi');
+let user, coords = {}, weather = {};
 
 // contains all functions for clicks
 
@@ -23,18 +26,6 @@ function signButton(){
    });
 }
 
-function clickForecast(evt){
-  let input = $('input').val();
-  let length = evt.target.innerHTML[0];
-
-  if(parseInt(input) && input.length === 5){
-    console.log('got a value of ', input);
-  } else {
-    evt.preventDefault();
-    window.alert ('Input must be a zipcode');
-  }
-}
-
 function logoutUser(){
   fb.logOut()
     .then(function() {
@@ -44,4 +35,22 @@ function logoutUser(){
     }, function(error) {
       console.log('Oops..unable to sign out: ', error);
     });
+}
+
+function clickForecast(evt){
+  let input = $('input').val();
+  let length = evt.target.id;
+
+  if(parseInt(input) && input.length === 5){
+    getLatLon(input)
+      .then(function(jsonData){
+        coords.lat = jsonData.results[0].geometry.location.lat;
+        coords.lon = jsonData.results[0].geometry.location.lng;
+        weather = getWeather[`${length}Day`](coords);
+        console.log(weather);
+      });
+  } else {
+    evt.preventDefault();
+    window.alert ('Input must be a zipcode');
+  }
 }

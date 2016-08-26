@@ -19,5 +19,3 @@ function testWeather(){
       console.log(weather);
     });
 }
-
-testWeather();
